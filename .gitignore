@@ -23,7 +23,3 @@ build/
 # System files
 .DS_Store
 Thumbs.db
-
-# Tailwind CSS
-tailwind.config.js
-postcss.config.js

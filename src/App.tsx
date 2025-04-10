@@ -12,8 +12,6 @@ interface Todo {
 const API_URL = 'https://todo-back-i055.onrender.com/api/todos';
 // const API_URL = 'http://localhost:5000/api/todos';
 
-
-
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState('');
@@ -81,24 +79,25 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Todo App</h1>
+    <div className="app-container">
+      <div className="app-content">
+        <h1 className="app-title">Todo App</h1>
         
-        <form onSubmit={addTodo} className="mb-8">
-          <div className="flex gap-2">
+        <form onSubmit={addTodo} className="todo-form">
+          <div className="form-group">
             <input
               type="text"
               value={newTodo}
               onChange={(e) => setNewTodo(e.target.value)}
               placeholder="Add a new todo..."
-              className="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="todo-input"
             />
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              className="add-button"
+              aria-label="Add Todo"
             >
-              <PlusIcon className="h-6 w-6" />
+              <PlusIcon className="icon" />
             </button>
           </div>
         </form>
@@ -110,57 +109,62 @@ function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, x: -100 }}
-              className="bg-white rounded-lg shadow-md p-4 mb-4"
+              className="todo-item"
             >
               {editingTodo?._id === todo._id ? (
-                <div className="flex gap-2">
+                <div className="edit-group">
                   <input
                     type="text"
                     value={editingTodo.text}
                     onChange={(e) => setEditingTodo({ ...editingTodo, text: e.target.value })}
-                    className="flex-1 px-2 py-1 border rounded"
+                    className="edit-input"
                     autoFocus
                   />
                   <button
                     onClick={() => updateTodo(todo._id, editingTodo.text)}
-                    className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                    className="save-button"
+                    aria-label="Save Todo"
                   >
                     Save
                   </button>
                   <button
                     onClick={() => setEditingTodo(null)}
-                    className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
+                    className="cancel-button"
+                    aria-label="Cancel Edit"
                   >
                     Cancel
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+                <div className="todo-content">
+                  <div className="todo-info">
                     <input
                       type="checkbox"
                       checked={todo.completed}
                       onChange={() => toggleTodo(todo._id, !todo.completed)}
-                      className="h-5 w-5 rounded border-gray-300"
+                      className="todo-checkbox"
+                      aria-label={`Mark ${todo.text} as ${todo.completed ? 'incomplete' : 'complete'}`}
                     />
-                    <span className={`${todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}>
+                    <span className={`todo-text ${todo.completed ? 'completed' : ''}`}>
                       {todo.text}
                     </span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="todo-actions">
                     <button
                       onClick={() => setEditingTodo(todo)}
-                      className="text-blue-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50"
+                      className="edit-button"
+                      aria-label={`Edit ${todo.text}`}
                       title="Edit"
                     >
-                      <PencilIcon className="h-5 w-5" />
+                      <PencilIcon className="icon" />
                     </button>
                     <button
                       onClick={() => deleteTodo(todo._id)}
-                      className="text-red-500 hover:text-red-600 p-2 rounded-full hover:bg-red-50"
+                      className="delete-button"
+                      aria-label={`Delete ${todo.text}`}
                       title="Delete"
                     >
-                      <TrashIcon className="h-5 w-5" />
+                      <TrashIcon className="icon" />
                     </button>
                   </div>
                 </div>
