@@ -9,8 +9,8 @@ interface Todo {
   completed: boolean;
 }
 
-// const API_URL = 'https://todo-back-i055.onrender.com/api/todos';
-const API_URL = 'http://localhost:5000/api/todos';
+const API_URL = 'https://todo-back-i055.onrender.com/api/todos';
+// const API_URL = 'http://localhost:5000/api/todos';
 
 
 
