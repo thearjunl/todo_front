@@ -98,6 +98,7 @@ function App() {
               aria-label="Add Todo"
             >
               <PlusIcon className="icon" />
+              insert
             </button>
           </div>
         </form>
@@ -157,6 +158,7 @@ function App() {
                       title="Edit"
                     >
                       <PencilIcon className="icon" />
+                      edit
                     </button>
                     <button
                       onClick={() => deleteTodo(todo._id)}
@@ -164,7 +166,7 @@ function App() {
                       aria-label={`Delete ${todo.text}`}
                       title="Delete"
                     >
-                      <TrashIcon className="icon" />
+                      <TrashIcon className="icon" />delete
                     </button>
                   </div>
                 </div>
